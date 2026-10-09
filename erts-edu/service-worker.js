@@ -1,5 +1,5 @@
 // Version du cache : à garder alignée avec « Version x.y.z » du pied de page (index.html).
-const V='erts-edu-v1.1.0',
+const V='erts-edu-v1.1.1',
 F=['./','index.html','offline.html','manifest.webmanifest','icons/icon.svg','icons/icon-192.png','css/style.css','css/theme.css','js/app.js',
 'data/ecole.json','data/sites.json','data/scolarite.json','data/alertes.json','data/actus.json','data/agenda.json','data/diva.json','data/documents.json','data/plateformes.json','data/faq.json','data/foad.json','data/resto.json','data/info.json'];
 // Un fichier manquant n'empêche plus l'installation : chaque ajout est tenté séparément.
