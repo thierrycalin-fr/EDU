@@ -83,7 +83,7 @@ async privacy(){return`<h2>Vie privée et accessibilité</h2><p>Ce site n’util
 
 /* ---------- alertes flash, site, routage ---------- */
 const alerts=async()=>(await L('alertes').catch(()=>[])).filter(x=>x.actif!==false&&(!x.jusqu_au||x.jusqu_au>=T)&&VS(x,SITE));
-async function top(){const[a,f,E]=await Promise.all([alerts(),feries(),J('ecole').catch(()=>({}))]),b=$('#alc'),w=closedWhy(E,T,f);
+async function refreshTop(){const[a,f,E]=await Promise.all([alerts(),feries(),J('ecole').catch(()=>({}))]),b=$('#alc'),w=closedWhy(E,T,f);
 b.textContent=a.length;b.hidden=!a.length;
 $('#banner').textContent=[w?w+'. L’établissement est fermé.':'',a[0]?'🔔 '+a[0].titre+' — '+a[0].texte:''].filter(Boolean).join(' · ')}
 function setSite(id){const s=SITES.find(x=>x.id==id);if(!s)return;SITE=s;st.set('site',s.id);$('#site').value=s.id;go(true)}
@@ -95,7 +95,7 @@ const d=new Date().toLocaleDateString('fr-FR',{timeZone:TZ,weekday:'long',day:'n
 $('#nav').innerHTML=NAV.filter(([h])=>h!='resto'||restoOn()).map(([h,l,i])=>`<a href="#${h}"${h==r?' aria-current="page"':''}><span aria-hidden="true">${i}</span> ${l}</a>`).join('');
 const f=V[r]||V.accueil;
 try{$('#main').innerHTML=await f(arg)}catch{$('#main').innerHTML='<p>Contenu momentanément indisponible.</p>'}
-if(!keep){$('#main').focus();scrollTo(0,0)}top().catch(()=>{})}
+if(!keep){$('#main').focus();scrollTo(0,0)}refreshTop().catch(()=>{})}
 addEventListener('hashchange',()=>go());go();
 document.addEventListener('input',e=>{const t=e.target;
 if(t.id=='mois')document.querySelectorAll('[data-m]').forEach(x=>x.hidden=t.value&&x.dataset.m!=t.value);
