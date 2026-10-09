@@ -10,7 +10,10 @@ index.html  admin.html  offline.html  manifest.webmanifest  service-worker.js
 css/style.css  css/theme.css      js/app.js      icons/      img/ (hero.webp facultatif)
 data/  ecole sites scolarite alertes actus agenda diva documents plateformes faq foad resto info (.json)
 ```
-Pages (routes `#...`) : accueil, actus, agenda, scolarite, diva, docs, foad, faq, plateformes, resto, contact, legal, privacy.
+Page unique (comme le portail d'origine) : actualités, accueil administratif, accompagnement, documents, agenda, espace FOAD, FAQ, plateformes. Les pastilles de navigation font défiler vers chaque section ; « Contact », « Alertes » et « Accessibilité » s'ouvrent en fenêtre. Pages à part : `#legal` et `#privacy`.
+
+## Design
+Le style reprend celui du portail d'origine (palette ERTS vert/crème/or, en-tête blanc, bandeau avec carte vitrée, pastilles, cartes arrondies, blocs FOAD teal et FAQ indigo), recréé en CSS interne : `css/style.css` (variables, thèmes sombre/contraste/daltonien) et `css/theme.css` (composants). Les icônes FontAwesome sont remplacées par des emojis. Photo du bandeau : déposez `img/hero.webp`.
 
 ## Fonctionnement
 - **Site choisi** (Olivet / Bourges / Chartres) : liste déroulante dans la barre, mémorisée sur l'appareil. Actualités, agenda, alertes, horaires, météo et restaurant s'adaptent au site.

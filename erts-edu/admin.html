@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Administration – ERTS EDU</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"></head><body>
-<header><div class="hero"><h1>Administration</h1><p>Portail ERTS EDU – accès réservé</p></div></header>
-<main id="m"></main>
+<header class="hero" style="padding:1.5rem 0"><div class="wrap"><h1 style="margin:0 0 .25rem">Administration</h1><p class="lead" style="margin:0">Portail ERTS EDU – accès réservé</p></div></header>
+<main id="m" class="wrap"></main>
 <script>
 /* Mot de passe : laissez HASH vide, ouvrez cette page, choisissez un mot de passe, puis collez la ligne proposée ici. */
 const HASH="";
@@ -41,7 +41,7 @@ async function draw(){if(!ok())return login();
 await Promise.all(K.map(ld));const d=DS[cur],a=data[cur],o=a[idx]||{},nx=data.agenda.filter(e=>e.date>=new Date().toISOString().slice(0,10)).sort((x,y)=>x.date.localeCompare(y.date))[0],T=new Date().toISOString().slice(0,10),na=data.alertes.filter(x=>x.actif!==false&&(!x.jusqu_au||x.jusqu_au>=T)).length;
 $('#m').innerHTML=`<section class="card"><h2>Tableau de bord</h2><p>${K.map(k=>DS[k].t+' : <strong>'+data[k].length+'</strong>').join(' · ')}<br>Alertes actives : <strong>${na}</strong> · Prochain événement : ${nx?esc(nx.titre)+' ('+esc(nx.date)+')':'aucun'}</p><small>Le site n’utilise aucun traceur : il n’y a donc pas de statistiques de fréquentation.</small></section>
 <nav style="margin:1rem 0;display:flex;flex-wrap:wrap;gap:.4rem">${K.map(k=>`<button class="${k==cur?'':'alt'}" data-t="${k}">${DS[k].t}${mod[k]?' *':''}</button>`).join('')}</nav>
-<div class="grid"><section class="card"><h2>${d.t} (${a.length})</h2>${a.map((x,i)=>`<p><button class="alt" data-ed="${i}">${esc(title(d,x))}</button> <button class="alt" data-del="${i}">Supprimer</button></p>`).join('')||'<p>Aucun élément.</p>'}<p><button data-new>Ajouter</button></p></section>
+<div class="grid"><section class="card"><h2 style="margin:0">${d.t} (${a.length})</h2>${a.map((x,i)=>`<p><button class="alt" data-ed="${i}">${esc(title(d,x))}</button> <button class="alt" data-del="${i}">Supprimer</button></p>`).join('')||'<p>Aucun élément.</p>'}<p><button data-new>Ajouter</button></p></section>
 <section class="card"><h2>${idx<0?'Nouvel élément':'Modifier'}</h2><div id="fm">${frm(d,o)}</div><p><button data-save>Enregistrer</button></p></section></div>
 <section class="card"><h2>Aperçu</h2><div id="pv">${pv(d,o)}</div></section>
 <section class="card"><h2>Publier</h2><p>${mod[cur]?'Modifications non publiées sur ':'Aucune modification sur '}<code>data/${cur}.json</code>. Téléchargez le fichier puis remplacez celui du dossier <code>data/</code> sur l’hébergement.</p><p><button data-exp>Télécharger ${cur}.json</button> <button class="alt" data-out>Se déconnecter</button></p></section>`}

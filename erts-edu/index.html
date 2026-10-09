@@ -4,20 +4,31 @@
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"></head><body>
 <a class="skip" href="#main">Aller au contenu</a>
-<header><div class="hero"><p class="kicker" id="today">ERTS EDU</p><h1>Bienvenue sur le <em>Portail ERTS EDU</em></h1><p>Espace d’accueil et d’information pour votre formation : horaires, actualités, accompagnement et accès aux plateformes.</p>
-<p><button id="alb" type="button">🔔 Alertes flash <span class="badge" id="alc" hidden>0</span></button> <a class="btn alt" href="#foad">💻 Guide FOAD</a></p></div></header>
-<div class="bar"><nav id="nav" aria-label="Navigation principale"></nav>
-<div class="tools"><label for="site">Mon site :</label><select id="site"></select><button id="abtn" aria-expanded="false" aria-controls="a11y">Accessibilité</button><button id="install" hidden>Installer l’application</button></div></div>
-<section id="a11y" hidden aria-label="Réglages d’accessibilité">
-<p>Taille du texte : <button data-s="0">A</button> <button data-s="1">A+</button> <button data-s="2">A++</button></p>
-<label><input type="checkbox" data-o="contrast"> Contraste élevé</label>
-<label><input type="checkbox" data-o="cb"> Mode daltonien</label>
-<label><input type="checkbox" data-o="dark"> Thème sombre</label>
-<label><input type="checkbox" data-o="lines"> Interligne agrandi</label>
-<label><input type="checkbox" data-o="big"> Boutons agrandis</label>
-<p><button id="tts">Lire la page à voix haute</button></p></section>
+<header class="hd"><div class="wrap hd-in">
+<div class="brand"><div class="logo" aria-hidden="true">ERTS</div><div><strong id="brand-n">École Régionale du Travail Social <span class="chip full" id="brand-r">Centre-Val de Loire</span></strong><small id="brand-a">Association ARDEQAF</small></div></div>
+<div class="hd-tools"><button id="install" class="pill-b" hidden>⬇️ Installer l’application</button><button id="abtn" class="pill-b" type="button">♿ <span>Accessibilité</span></button></div></div></header>
+<section class="hero" id="accueil"><div class="wrap hero-g">
+<div><p class="gpill" id="today">📅 …</p>
+<h1>Bienvenue sur le <em>Portail ERTS EDU</em></h1>
+<p class="lead">Espace d’accueil et d’information pour votre formation : horaires, actualités, accompagnement et accès aux plateformes.</p>
+<div class="hero-b"><button id="alb" class="hpill r" type="button">🔔 Alertes flash <span class="bd" id="alc" hidden>0</span></button><a class="hpill a" href="#espace-foad" data-open="foad">📖 Guide FOAD</a></div></div>
+<div class="side" id="heroside"></div></div></section>
+<nav class="pills" aria-label="Navigation principale"><div class="wrap pills-in" id="nav"></div></nav>
 <div id="banner" role="status" aria-live="polite"></div>
-<main id="main" tabindex="-1"></main>
+<main id="main" class="wrap" tabindex="-1"></main>
 <dialog id="dlg" aria-label="Détail"></dialog>
-<footer><a href="#legal">Mentions légales</a> · <a href="#privacy">Vie privée et accessibilité</a> · Version 1.0.0</footer>
+<dialog id="a11y" aria-label="Accessibilité"><div class="dlg-in"><button class="x" data-close aria-label="Fermer">✕</button>
+<div class="dlg-h"><div class="dlg-i tint t-blue" aria-hidden="true">♿</div><div><h2>Accessibilité</h2><p>Réglages enregistrés sur votre appareil</p></div></div>
+<div class="sz"><span>Taille du texte :</span><button data-s="0" class="alt">A</button><button data-s="1" class="alt">A+</button><button data-s="2" class="alt">A++</button></div>
+<div><label class="opt"><input type="checkbox" data-o="contrast"> Contraste élevé</label>
+<label class="opt"><input type="checkbox" data-o="cb"> Mode daltonien</label>
+<label class="opt"><input type="checkbox" data-o="dark"> Thème sombre</label>
+<label class="opt"><input type="checkbox" data-o="lines"> Interligne agrandi</label>
+<label class="opt"><input type="checkbox" data-o="big"> Boutons agrandis</label></div>
+<button id="tts" class="alt">🔊 Lire la page à voix haute</button><button data-close>Fermer</button></div></dialog>
+<footer class="ft"><div class="wrap"><div class="ft-g">
+<div><div class="b"><span>ERTS</span><span>École Régionale du Travail Social</span></div><p>Association ARDEQAF — Formation aux métiers du travail social.</p></div>
+<div><h3>Plateformes</h3><ul><li><a href="#plateformes">NABU Moodle</a></li><li><a href="#plateformes">WebAurion</a></li><li><a href="#plateformes">SoWesign</a></li></ul></div>
+<div><h3>Accompagnement</h3><ul><li><a href="#service-diva">Service DIVA</a></li><li><a href="#service-diva">Mission Handicap</a></li></ul></div></div>
+<p class="ft-l"><a href="#legal">Mentions légales</a> · <a href="#privacy">Vie privée et accessibilité</a> · Version 1.1.0</p></div></footer>
 <script src="js/app.js" defer></script></body></html>
