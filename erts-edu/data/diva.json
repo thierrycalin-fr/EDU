@@ -1,0 +1,5 @@
+{"intro":"Le service DIVA (Documentation, International & Vie des Apprenants) vous accompagne dans vos projets de mobilité et votre quotidien d’étude.","email":"diva@example.org",
+"services":[
+{"ico":"🌍","titre":"Documentation & mobilité internationale (Erasmus+)","texte":"Bourses de stage à l’étranger et partenariats européens."},
+{"ico":"👂","titre":"Vie des apprenants (écoute & orientation)","texte":"Accueil, écoute et redirection vers nos partenaires extérieurs (santé, soutien psychologique et aides financières d’urgence)."}],
+"referent":{"titre":"Mission Handicap ERTS","prenom":"Sarah","texte":"Sarah est votre référente handicap. Elle aménage vos parcours de formation et adapte vos modalités d’examens en toute confidentialité."}}

@@ -1,0 +1,5 @@
+{"plateformes":[
+{"id":"p1","ico":"📚","tag":"Espace pédagogique","nom":"NABU Moodle","texte":"Consultez vos espaces de cours, supports pédagogiques et activités en ligne.","bouton":"Accéder à NABU Moodle","url":""},
+{"id":"p2","ico":"✍️","tag":"Présences","nom":"SoWesign","texte":"Signez votre émargement à chaque demi-journée de formation.","bouton":"Émarger en ligne","url":""},
+{"id":"p3","ico":"🗂️","tag":"Scolarité","nom":"WebAurion","texte":"Consultez votre planning, vos notes et gérez votre dossier administratif.","bouton":"Accéder à WebAurion","url":""}
+]}

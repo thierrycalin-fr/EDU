@@ -1,0 +1,8 @@
+{"foad":[
+{"id":"f1","type":"conseil","titre":"Connectez-vous sur un réseau internet stable et privilégiez un environnement calme.","texte":""},
+{"id":"f2","type":"conseil","titre":"Préparez votre matériel en amont de la session (casque, micro, webcam fonctionnelle).","texte":""},
+{"id":"f3","type":"conseil","titre":"Rejoignez la classe virtuelle 5 minutes avant le début du cours pour valider votre connexion.","texte":""},
+{"id":"f4","type":"regle","titre":"Émargement obligatoire","texte":"La présence en FOAD est contrôlée via la signature sur SoWesign au début de chaque demi-journée de formation (matin et après-midi)."},
+{"id":"f5","type":"regle","titre":"Caméra et micro","texte":"L’activation de la caméra peut être requise par le formateur lors des échanges et ateliers pour attester de la présence effective."},
+{"id":"f6","type":"regle","titre":"Droit à l’image et confidentialité","texte":"Il est strictement interdit d’enregistrer, de photographier ou de diffuser tout extrait de cours à distance sans l’accord écrit préalable des intervenants et des apprenants."}
+]}

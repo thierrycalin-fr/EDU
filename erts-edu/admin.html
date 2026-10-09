@@ -1,0 +1,62 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Administration – ERTS EDU</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"></head><body>
+<header><div class="hero"><h1>Administration</h1><p>Portail ERTS EDU – accès réservé</p></div></header>
+<main id="m"></main>
+<script>
+/* Mot de passe : laissez HASH vide, ouvrez cette page, choisissez un mot de passe, puis collez la ligne proposée ici. */
+const HASH="";
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const enc=t=>new TextEncoder().encode(t);
+const kdf=async p=>[...new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc('erts-edu-admin'),iterations:300000,hash:'SHA-256'},await crypto.subtle.importKey('raw',enc(p),'PBKDF2',false,['deriveBits']),256))].map(b=>b.toString(16).padStart(2,'0')).join('');
+/* Schéma : F(clé, libellé, type, options|aide, valeur par défaut, obligatoire). Types : text textarea date time select bool list lines */
+const F=(k,l,t='text',o,d,r)=>({k,l,t,o,d,r});
+const SITEH='Sites concernés : identifiants séparés par des virgules (ex. olivet, bourges). Vide = tous les sites';
+const DS={
+actus:{t:'Actualités',root:'actus',f:[F('titre','Titre','text',0,0,1),F('date','Date','date',0,0,1),F('categorie','Catégorie','select',['Conférence','Projet étudiant','Vie du campus','Scolarité','Formation','Alerte']),F('sites',SITEH,'list'),F('excerpt','Résumé court','textarea'),F('body','Texte complet (facultatif)','textarea'),F('photo','Photo : adresse du fichier, ex. img/campus.webp (facultatif)')]},
+agenda:{t:'Agenda',root:'agenda',f:[F('titre','Titre','text',0,0,1),F('date','Date','date',0,0,1),F('debut','Heure de début (facultatif)','time'),F('lieu','Lieu'),F('sites',SITEH,'list'),F('description','Description','textarea')]},
+alertes:{t:'Alertes flash',root:'alertes',f:[F('titre','Titre','text',0,0,1),F('texte','Texte','textarea'),F('sites',SITEH,'list'),F('actif','Alerte active','bool',0,true),F('jusqu_au','Visible jusqu’au (facultatif)','date')]},
+scolarite:{t:'Scolarité',root:'filieres',f:[F('id','Identifiant court (ex. es)','text',0,0,1),F('nom','Nom de la filière','text',0,0,1),F('sigle','Sigle'),F('sites',SITEH,'list'),F('lignes','Horaires, une ligne par créneau (ex. Lundi — Jeudi : 08h30 - 12h30 / 13h30 - 17h00)','lines'),F('email','E-mail du secrétariat')]},
+sites:{t:'Sites',root:'sites',f:[F('id','Identifiant court, sans espace (ex. olivet)','text',0,0,1),F('nom','Nom (ex. Olivet)','text',0,0,1),F('type','Type','select',['Site principal','Site satellite']),F('badge','Étiquette (ex. Cher (18))'),F('adresse','Adresse'),F('tel','Téléphone'),F('email','E-mail d’accueil (facultatif)'),F('lat','Latitude (météo)'),F('lon','Longitude (météo)'),F('centre_doc','Horaires du centre de documentation (facultatif)')]},
+documents:{t:'Livrets & chartes',root:'documents',f:[F('titre','Titre','text',0,0,1),F('ico','Icône (un emoji)'),F('url','Adresse du document (https://… ou fichier du site, ex. docs/livret.pdf)')]},
+plateformes:{t:'Plateformes',root:'plateformes',f:[F('nom','Nom','text',0,0,1),F('ico','Icône (un emoji)'),F('tag','Étiquette'),F('texte','Description','textarea'),F('bouton','Texte du bouton'),F('url','Adresse de la plateforme (https://…)')]},
+faq:{t:'FAQ',root:'faq',f:[F('q','Question','text',0,0,1),F('groupe','Groupe','select',['Technique','Formation']),F('r','Réponse','textarea')]},
+foad:{t:'FOAD',root:'foad',f:[F('titre','Titre ou phrase','text',0,0,1),F('type','Type','select',['conseil','regle']),F('texte','Texte (pour une règle)','textarea')]}};
+const K=Object.keys(DS),data={},mod={};let cur='actus',idx=-1;
+async function ld(k){if(!data[k]){const j=await(await fetch('data/'+k+'.json',{cache:'no-store'})).json();data[k]=j[DS[k].root]}return data[k]}
+const ok=()=>{try{return sessionStorage.getItem('adm')=='1'}catch{return false}};
+function login(){
+if(!HASH){$('#m').innerHTML=`<div class="card"><h2>Première utilisation : choisir un mot de passe</h2><p>Choisissez un mot de passe d’au moins 10 caractères. Le site affichera une ligne à copier dans ce fichier.</p><label for="pw">Mot de passe</label><input id="pw" type="password" minlength="10"><p><button id="mk">Créer</button></p><pre id="out" style="white-space:pre-wrap;word-break:break-all"></pre></div>`;
+$('#mk').onclick=async()=>{const p=$('#pw').value;if(p.length<10)return alert('10 caractères minimum.');$('#out').textContent='Dans admin.html, remplacez la ligne  const HASH="";  par :\nconst HASH="'+await kdf(p)+'";'};return}
+$('#m').innerHTML=`<form id="lg" class="card"><label for="pw">Mot de passe</label><input id="pw" type="password" autocomplete="current-password"><p><button>Entrer</button></p><p id="er" role="alert"></p></form>`;
+$('#lg').onsubmit=async e=>{e.preventDefault();if(await kdf($('#pw').value)==HASH){try{sessionStorage.setItem('adm','1')}catch{}draw()}else $('#er').textContent='Mot de passe incorrect.'}}
+const toStr=(f,v)=>f.t=='list'?(v||[]).join(', '):f.t=='lines'?(v||[]).join('\n'):(v??'');
+function frm(d,o){return d.f.map(f=>{const id='f_'+f.k,v=toStr(f,o[f.k]??f.d);
+if(f.t=='bool')return`<label><input type="checkbox" id="${id}"${(o[f.k]??f.d)?' checked':''}> ${esc(f.l)}</label>`;
+if(f.t=='textarea'||f.t=='lines')return`<label for="${id}">${esc(f.l)}</label><textarea id="${id}" rows="${f.t=='lines'?4:3}">${esc(v)}</textarea>`;
+if(f.t=='select')return`<label for="${id}">${esc(f.l)}</label><select id="${id}">${f.o.map(x=>`<option${x==v?' selected':''}>${esc(x)}</option>`).join('')}</select>`;
+return`<label for="${id}">${esc(f.l)}</label><input id="${id}" type="${f.t=='list'?'text':f.t}" value="${esc(v)}">`}).join('')}
+function val(d){const o={};d.f.forEach(f=>{const e=$('#f_'+f.k);o[f.k]=f.t=='bool'?e.checked:f.t=='list'?e.value.split(',').map(x=>x.trim()).filter(Boolean):f.t=='lines'?e.value.split('\n').map(x=>x.trim()).filter(Boolean):e.value.trim()});return o}
+const title=(d,o)=>o[d.f[0].k]||(d.f[1]&&o[d.f[1].k])||'(sans titre)';
+function pv(d,o){return`<article class="card"><h3>${esc(title(d,o))}</h3>${d.f.slice(1).map(f=>{const v=toStr(f,o[f.k]);return v!==''&&v!==false&&v!==true?`<p><small>${esc(f.l.split('(')[0].split(':')[0])} :</small> ${esc(v)}</p>`:''}).join('')}</article>`}
+async function draw(){if(!ok())return login();
+await Promise.all(K.map(ld));const d=DS[cur],a=data[cur],o=a[idx]||{},nx=data.agenda.filter(e=>e.date>=new Date().toISOString().slice(0,10)).sort((x,y)=>x.date.localeCompare(y.date))[0],T=new Date().toISOString().slice(0,10),na=data.alertes.filter(x=>x.actif!==false&&(!x.jusqu_au||x.jusqu_au>=T)).length;
+$('#m').innerHTML=`<section class="card"><h2>Tableau de bord</h2><p>${K.map(k=>DS[k].t+' : <strong>'+data[k].length+'</strong>').join(' · ')}<br>Alertes actives : <strong>${na}</strong> · Prochain événement : ${nx?esc(nx.titre)+' ('+esc(nx.date)+')':'aucun'}</p><small>Le site n’utilise aucun traceur : il n’y a donc pas de statistiques de fréquentation.</small></section>
+<nav style="margin:1rem 0;display:flex;flex-wrap:wrap;gap:.4rem">${K.map(k=>`<button class="${k==cur?'':'alt'}" data-t="${k}">${DS[k].t}${mod[k]?' *':''}</button>`).join('')}</nav>
+<div class="grid"><section class="card"><h2>${d.t} (${a.length})</h2>${a.map((x,i)=>`<p><button class="alt" data-ed="${i}">${esc(title(d,x))}</button> <button class="alt" data-del="${i}">Supprimer</button></p>`).join('')||'<p>Aucun élément.</p>'}<p><button data-new>Ajouter</button></p></section>
+<section class="card"><h2>${idx<0?'Nouvel élément':'Modifier'}</h2><div id="fm">${frm(d,o)}</div><p><button data-save>Enregistrer</button></p></section></div>
+<section class="card"><h2>Aperçu</h2><div id="pv">${pv(d,o)}</div></section>
+<section class="card"><h2>Publier</h2><p>${mod[cur]?'Modifications non publiées sur ':'Aucune modification sur '}<code>data/${cur}.json</code>. Téléchargez le fichier puis remplacez celui du dossier <code>data/</code> sur l’hébergement.</p><p><button data-exp>Télécharger ${cur}.json</button> <button class="alt" data-out>Se déconnecter</button></p></section>`}
+document.addEventListener('input',e=>{if(e.target.id?.startsWith('f_'))$('#pv').innerHTML=pv(DS[cur],val(DS[cur]))});
+addEventListener('beforeunload',e=>{if(Object.keys(mod).length){e.preventDefault();e.returnValue=''}});
+document.addEventListener('click',async e=>{const b=e.target.closest('button');if(!b)return;const a=data[cur],d=DS[cur];
+if(b.dataset.t){cur=b.dataset.t;idx=-1;draw()}
+if(b.dataset.ed!=null){idx=+b.dataset.ed;draw()}
+if('new'in b.dataset){idx=-1;draw()}
+if(b.dataset.del!=null&&confirm('Supprimer cet élément ?')){a.splice(+b.dataset.del,1);mod[cur]=1;idx=-1;draw()}
+if('save'in b.dataset){const v=val(d),miss=d.f.find(f=>f.r&&!v[f.k]);if(miss)return alert('Champ obligatoire : '+miss.l.split('(')[0]);
+if(cur=='sites'&&!/^[a-z0-9-]+$/.test(v.id))return alert('Identifiant : lettres minuscules, chiffres et tirets uniquement.');
+if(idx>=0)Object.assign(a[idx],v);else{if(cur=='actus')v.id=Math.max(0,...a.map(x=>+x.id||0))+1;else if(!v.id)v.id=cur[0]+Date.now();a.push(v);idx=a.length-1}
+mod[cur]=1;draw()}
+if('exp'in b.dataset){const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([JSON.stringify({[d.root]:a},null,1)],{type:'application/json'}));l.download=cur+'.json';l.click();delete mod[cur];draw()}
+if('out'in b.dataset){try{sessionStorage.removeItem('adm')}catch{}login()}});
+draw();
+</script></body></html>

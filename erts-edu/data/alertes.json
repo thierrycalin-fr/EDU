@@ -1,0 +1,4 @@
+{"alertes":[
+{"id":"a1","titre":"Information d’accès campus","texte":"Consultez les consignes de stationnement et d’arrivée sur votre site.","sites":[],"actif":true,"jusqu_au":""},
+{"id":"a2","titre":"Rappel émargement","texte":"Pensez à valider votre présence chaque demi-journée sur SoWesign.","sites":[],"actif":true,"jusqu_au":""}
+]}

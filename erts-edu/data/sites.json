@@ -1,0 +1,5 @@
+{"sites":[
+{"id":"olivet","nom":"Olivet","type":"Site principal","badge":"Siège régional","adresse":"205 Rue de la Sologne, 45160 Olivet","tel":"02 38 45 61 76","email":"","lat":47.859,"lon":1.895,"centre_doc":"Du lundi au jeudi : 08h30 - 18h00 | Vendredi : 08h30 - 16h30"},
+{"id":"bourges","nom":"Bourges","type":"Site satellite","badge":"Cher (18)","adresse":"6 Place de la Pyrotechnie, 18000 Bourges","tel":"02 48 20 15 30","email":"","lat":47.081,"lon":2.398,"centre_doc":""},
+{"id":"chartres","nom":"Chartres","type":"Site satellite","badge":"Eure-et-Loir (28)","adresse":"11 Rue de la Mairie, 28000 Chartres","tel":"02 37 30 08 00","email":"","lat":48.4469,"lon":1.489,"centre_doc":""}
+]}

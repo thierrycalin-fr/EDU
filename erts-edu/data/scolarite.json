@@ -1,0 +1,6 @@
+{"filieres":[
+{"id":"es","nom":"Éducateur Spécialisé","sigle":"ES","sites":["olivet"],"lignes":["Lundi — Jeudi : 08h30 - 12h30 / 13h30 - 17h00","Vendredi : 08h30 - 12h30 / 13h30 - 16h00"],"email":"es@erts-formation.fr"},
+{"id":"ass","nom":"Assistant de Service Social","sigle":"ASS","sites":["olivet"],"lignes":["Lundi — Jeudi : 08h30 - 12h30 / 13h30 - 17h00","Vendredi : 08h30 - 12h30 (fermé l’après-midi)"],"email":"ass@erts-formation.fr"},
+{"id":"eje","nom":"Éducateur de Jeunes Enfants","sigle":"EJE","sites":["olivet"],"lignes":["Mardi & Jeudi : 08h45 - 12h15 / 13h45 - 17h15","Mercredi & Vendredi : 08h45 - 12h15"],"email":"eje@erts-formation.fr"},
+{"id":"aes","nom":"Accompagnant Éducatif & Social","sigle":"AES","sites":["olivet"],"lignes":["Lundi — Vendredi : 08h30 - 12h00 / 13h30 - 16h30"],"email":"aes@erts-formation.fr"}
+]}

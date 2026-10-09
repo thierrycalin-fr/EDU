@@ -1,0 +1,2 @@
+{"name":"Portail ERTS EDU","short_name":"ERTS EDU","description":"Portail d’information des apprenants de l’ERTS","lang":"fr","start_url":"./index.html","scope":"./","display":"standalone","background_color":"#f6f5f0","theme_color":"#1d4332",
+"icons":[{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}]}

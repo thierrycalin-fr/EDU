@@ -1,0 +1,23 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portail ERTS EDU – École Régionale du Travail Social</title><meta name="theme-color" content="#1d4332">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"></head><body>
+<a class="skip" href="#main">Aller au contenu</a>
+<header><div class="hero"><p class="kicker" id="today">ERTS EDU</p><h1>Bienvenue sur le <em>Portail ERTS EDU</em></h1><p>Espace d’accueil et d’information pour votre formation : horaires, actualités, accompagnement et accès aux plateformes.</p>
+<p><button id="alb" type="button">🔔 Alertes flash <span class="badge" id="alc" hidden>0</span></button> <a class="btn alt" href="#foad">💻 Guide FOAD</a></p></div></header>
+<div class="bar"><nav id="nav" aria-label="Navigation principale"></nav>
+<div class="tools"><label for="site">Mon site :</label><select id="site"></select><button id="abtn" aria-expanded="false" aria-controls="a11y">Accessibilité</button><button id="install" hidden>Installer l’application</button></div></div>
+<section id="a11y" hidden aria-label="Réglages d’accessibilité">
+<p>Taille du texte : <button data-s="0">A</button> <button data-s="1">A+</button> <button data-s="2">A++</button></p>
+<label><input type="checkbox" data-o="contrast"> Contraste élevé</label>
+<label><input type="checkbox" data-o="cb"> Mode daltonien</label>
+<label><input type="checkbox" data-o="dark"> Thème sombre</label>
+<label><input type="checkbox" data-o="lines"> Interligne agrandi</label>
+<label><input type="checkbox" data-o="big"> Boutons agrandis</label>
+<p><button id="tts">Lire la page à voix haute</button></p></section>
+<div id="banner" role="status" aria-live="polite"></div>
+<main id="main" tabindex="-1"></main>
+<dialog id="dlg" aria-label="Détail"></dialog>
+<footer><a href="#legal">Mentions légales</a> · <a href="#privacy">Vie privée et accessibilité</a> · Version 1.0.0</footer>
+<script src="js/app.js" defer></script></body></html>

@@ -1,0 +1,11 @@
+{
+ "nom": "École Régionale du Travail Social",
+ "sigle": "ERTS",
+ "association": "Association ARDEQAF",
+ "region": "Centre-Val de Loire",
+ "email": "contact@example.org",
+ "remarque_scolarite": "Horaires habituels d’accueil téléphonique et physique, sujets à modification selon le calendrier des examens.",
+ "fermetures": [
+  {"du": "2026-12-24", "au": "2027-01-02", "motif": "Vacances de fin d’année (exemple)"}
+ ]
+}
